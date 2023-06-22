@@ -9,7 +9,7 @@ export const AppRoutes = () => {
       <Route
         path="/pagina-inicial"
         element={
-          <Button variant="contained" color="primary" onClick={ toggleTheme }>
+          <Button variant="contained" color="primary" onClick={toggleTheme}>
             Toggle Theme
           </Button>
         }
