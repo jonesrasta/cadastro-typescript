@@ -1,6 +1,6 @@
 import { Avatar, Divider, Drawer, useTheme, List, ListItemButton, ListItemText, ListItemIcon, Icon, useMediaQuery } from "@mui/material";
 import { Box } from "@mui/system";
-import { useDrawerContext } from "../../contexts";
+import { useAppThemeContext, useDrawerContext } from "../../contexts";
 import { useMatch, useNavigate, useResolvedPath } from "react-router-dom";
 
 interface IListItemLinkProps {
@@ -39,6 +39,7 @@ export const MenuLateral: React.FC<IMenuLateralProps> = ({ children }) => {
     const smDown = useMediaQuery(theme.breakpoints.down('sm'));
 
     const { isDrawerOpen, toggleDrawerOpen, drawerOptions } = useDrawerContext();
+    const { toggleTheme } = useAppThemeContext();
 
     return (
         <>
@@ -51,23 +52,38 @@ export const MenuLateral: React.FC<IMenuLateralProps> = ({ children }) => {
                             width: theme.spacing(12)
                         }} src="https://github.com/jonesrasta.png" />
                     </Box>
+
                     <Divider />
+
                     <Box flex={1}>
                         <List component="nav">
-                            {drawerOptions.map(drawerOptions => (
+                            {drawerOptions.map(drawerOption => (
                                 <ListItemLink
-                                    key={drawerOptions.path}
-                                    icon={drawerOptions.icon}
-                                    label={drawerOptions.label}
-                                    to={drawerOptions.path}
+                                    to={drawerOption.path}
+                                    key={drawerOption.path}
+                                    icon={drawerOption.icon}
+                                    label={drawerOption.label}
                                     onClick={smDown ? toggleDrawerOpen : undefined}
                                 />
                             ))}
                         </List>
                     </Box>
+
+                </Box>
+
+                <Box>
+                    <List component="nav">
+                        <ListItemButton onClick={toggleTheme}>
+                            <ListItemIcon>
+                                <Icon>dark_mode</Icon>
+                            </ListItemIcon>
+                            <ListItemText primary="Dark mode" />
+                        </ListItemButton>
+                    </List>
                 </Box>
             </Drawer>
-            <Box height="100vw" marginLeft={smDown ? 0 : theme.spacing(28)}>
+
+            <Box height="100vh" marginLeft={smDown ? 0 : theme.spacing(28)}>
                 {children}
             </Box>
         </>
