@@ -44,7 +44,7 @@ export const MenuLateral: React.FC<IMenuLateralProps> = ({ children }) => {
     return (
         <>
             <Drawer open={isDrawerOpen} variant={smDown ? 'temporary' : 'permanent'} onClose={toggleDrawerOpen}>
-                <Box width={theme.spacing(28)} height="100%" display="flex flex-col">
+                <Box width={theme.spacing(28)} height="100%" display="flex" flexDirection="column">
                     <Box width="100%" height={theme.spacing(20)}
                         display="flex" alignItems="center" justifyContent="center">
                         <Avatar sx={{
